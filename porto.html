@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Nama Anda — Fotografer Landscape &amp; Macro | Praktisi Kebijakan Publik</title>
+<meta name="description" content="Portofolio pribadi: fotografi landscape & macro, serta pengalaman profesional di bidang pemerintahan dan kebijakan publik." />
+
+<!--
+  ================================================================
+  PANDUAN KUSTOMISASI CEPAT
+  ================================================================
+  1. Ganti semua teks "Nama Anda" / "[Jabatan Anda]" / "[Nama Instansi]"
+     / "[20XX]" dengan data asli Anda (cari tanda kurung siku).
+  2. Ganti foto: setiap kartu di bagian "Karya" punya <div class="photo-surface">
+     — ganti dengan <img src="foto-anda.jpg" alt="deskripsi foto" style="width:100%;height:100%;object-fit:cover">
+     lalu hapus kelas ph-landscape/ph-macro pada elemen tersebut (kelas itu hanya
+     menghasilkan gradasi warna sebagai placeholder).
+  3. Palet warna & font diatur di :root pada bagian <style> — ubah di satu
+     tempat untuk memengaruhi seluruh halaman.
+  4. Bagian ini murni landing page (satu halaman). Tautan nav "Kontak", dsb.
+     mengarah ke section di halaman yang sama (anchor #id).
+  ================================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+  /* ============================================================
+     TOKEN — WARNA, TIPOGRAFI, BAYANGAN
+     ============================================================ */
+  :root{
+    /* palet inti yang diberikan */
+    --c-macro-light:#E8F957;
+    --c-macro:#BBE11A;
+    --c-sky-pale:#C1E5FB;
+    --c-sky:#86D0FD;
+    --c-blue:#4891E7;
+    --c-navy:#042C8F;
+
+    /* permukaan */
+    --bg:#EEF5FC;
+    --surface:#F5FAFF;
+    --surface-2:#E7F1FC;
+
+    /* teks */
+    --ink:#0B2545;
+    --ink-soft:#3C5A80;
+    --ink-faint:#6C85A6;
+    --on-navy:#EAF3FF;
+    --on-navy-soft:#B9D0F2;
+
+    /* neomorphism (bayangan bertinta biru agar tidak abu-abu generik) */
+    --shadow-light:#FFFFFF;
+    --shadow-dark:rgba(4,44,143,.16);
+    --shadow-dark-strong:rgba(4,44,143,.26);
+
+    /* glass */
+    --glass-bg:rgba(255,255,255,.46);
+    --glass-bg-soft:rgba(255,255,255,.3);
+    --glass-border:rgba(255,255,255,.7);
+    --glass-shadow:0 8px 32px rgba(4,44,143,.14);
+
+    /* tipografi */
+    --f-display:'Bricolage Grotesque',system-ui,sans-serif;
+    --f-body:'Plus Jakarta Sans',system-ui,sans-serif;
+    --f-mono:'JetBrains Mono',monospace;
+
+    --radius-lg:28px;
+    --radius-md:18px;
+    --radius-sm:12px;
+    --container:1180px;
+  }
+
+  *,*::before,*::after{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:var(--bg);
+    color:var(--ink-soft);
+    font-family:var(--f-body);
+    font-size:16px;
+    line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  ::selection{background:var(--c-sky);color:var(--ink);}
+  a{color:inherit;text-decoration:none;}
+  ul{list-style:none;margin:0;padding:0;}
+  h1,h2,h3{
+    font-family:var(--f-display);
+    color:var(--ink);
+    line-height:1.08;
+    margin:0;
+    font-weight:700;
+  }
+  p{margin:0;}
+  button{font-family:inherit;cursor:pointer;}
+
+  :focus-visible{
+    outline:3px solid var(--c-blue);
+    outline-offset:3px;
+    border-radius:6px;
+  }
+
+  .skip-link{
+    position:absolute;left:-999px;top:0;
+    background:var(--c-navy);color:#fff;
+    padding:12px 20px;border-radius:0 0 10px 0;z-index:999;
+  }
+  .skip-link:focus{left:0;}
+
+  .container{
+    max-width:var(--container);
+    margin-inline:auto;
+    padding-inline:28px;
+  }
+  section{padding-block:clamp(70px,9vw,120px);position:relative;}
+
+  .eyebrow{
+    font-family:var(--f-mono);
+    font-size:.78rem;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    color:var(--c-navy);
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin-bottom:14px;
+    font-weight:500;
+  }
+  .eyebrow::before{
+    content:"";
+    width:22px;height:1px;
+    background:var(--c-navy);
+    display:inline-block;
+  }
+  .eyebrow.on-light{color:var(--c-macro);}
+  .eyebrow.on-light::before{background:var(--c-macro);}
+
+  /* ============================================================
+     UTILITAS NEOMORPHISM & GLASSMORPHISM
+     ============================================================ */
+  .neu{
+    background:var(--surface);
+    border-radius:var(--radius-lg);
+    box-shadow:10px 10px 22px var(--shadow-dark), -10px -10px 22px var(--shadow-light);
+  }
+  .neu-sm{
+    background:var(--surface);
+    border-radius:var(--radius-sm);
+    box-shadow:6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light);
+  }
+  .neu-inset{
+    box-shadow:inset 6px 6px 14px var(--shadow-dark), inset -6px -6px 14px var(--shadow-light);
+  }
+  .glass{
+    background:var(--glass-bg);
+    -webkit-backdrop-filter:blur(18px) saturate(160%);
+    backdrop-filter:blur(18px) saturate(160%);
+    border:1px solid var(--glass-border);
+    border-radius:var(--radius-lg);
+    box-shadow:var(--glass-shadow);
+  }
+
+  /* tombol */
+  .btn{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:15px 26px;
+    border-radius:100px;
+    border:none;
+    font-family:var(--f-body);
+    font-weight:600;
+    font-size:.96rem;
+    transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s ease;
+  }
+  .btn:active{transform:translateY(1px) scale(.98);}
+  .btn-photo{
+    background:linear-gradient(120deg,var(--c-macro-light),var(--c-macro));
+    color:var(--ink);
+    box-shadow:8px 8px 18px var(--shadow-dark), -8px -8px 18px var(--shadow-light);
+  }
+  .btn-photo:hover{box-shadow:10px 10px 22px var(--shadow-dark-strong), -6px -6px 16px var(--shadow-light);}
+  .btn-gov{
+    background:linear-gradient(120deg,var(--c-blue),var(--c-navy));
+    color:var(--on-navy);
+    box-shadow:8px 8px 18px var(--shadow-dark), -8px -8px 18px var(--shadow-light);
+  }
+  .btn-gov:hover{box-shadow:10px 10px 22px var(--shadow-dark-strong), -6px -6px 16px var(--shadow-light);}
+  .btn-ghost{
+    background:var(--glass-bg-soft);
+    border:1px solid var(--glass-border);
+    color:var(--ink);
+    -webkit-backdrop-filter:blur(10px);
+    backdrop-filter:blur(10px);
+  }
+  .btn-ghost:hover{background:var(--glass-bg);}
+
+  .tag-row{display:flex;flex-wrap:wrap;gap:9px;}
+  .tag{
+    font-family:var(--f-mono);
+    font-size:.72rem;
+    letter-spacing:.03em;
+    padding:7px 13px;
+    border-radius:100px;
+  }
+  .tag.on-navy{background:rgba(255,255,255,.12);color:var(--on-navy-soft);border:1px solid rgba(255,255,255,.22);}
+  .tag.on-glass{background:rgba(4,44,143,.06);color:var(--c-navy);border:1px solid rgba(4,44,143,.12);}
+
+  /* reveal on scroll */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease, transform .8s cubic-bezier(.2,.8,.2,1);}
+  .reveal.in-view{opacity:1;transform:translateY(0);}
+
+  /* ============================================================
+     NAVIGASI
+     ============================================================ */
+  .nav{
+    position:fixed;top:0;left:0;right:0;z-index:100;
+    padding:16px 0;
+    transition:padding .3s ease;
+  }
+  .nav-inner{
+    max-width:var(--container);
+    margin-inline:auto;
+    padding:12px 20px;
+    display:flex;align-items:center;justify-content:space-between;
+    background:var(--glass-bg-soft);
+    -webkit-backdrop-filter:blur(20px) saturate(160%);
+    backdrop-filter:blur(20px) saturate(160%);
+    border:1px solid var(--glass-border);
+    border-radius:100px;
+    box-shadow:var(--glass-shadow);
+    transition:background .3s ease, box-shadow .3s ease;
+  }
+  .nav.scrolled .nav-inner{background:var(--glass-bg);box-shadow:0 10px 30px rgba(4,44,143,.18);}
+  .brand{display:flex;align-items:center;gap:11px;font-family:var(--f-display);font-weight:700;color:var(--ink);font-size:1.02rem;}
+  .logo-mark{
+    width:32px;height:32px;border-radius:50%;
+    background:conic-gradient(from 0deg,var(--c-macro-light),var(--c-macro),var(--c-sky-pale),var(--c-sky),var(--c-blue),var(--c-navy),var(--c-macro-light));
+    position:relative;flex:none;
+    box-shadow:0 0 0 1px rgba(255,255,255,.6) inset;
+  }
+  .logo-mark::after{
+    content:"";position:absolute;inset:7px;border-radius:50%;
+    background:var(--surface);
+  }
+  .nav-links{display:flex;align-items:center;gap:6px;}
+  .nav-links a{
+    padding:9px 16px;border-radius:100px;font-size:.9rem;font-weight:500;color:var(--ink-soft);
+    transition:background .25s ease,color .25s ease;
+  }
+  .nav-links a:hover{background:rgba(4,44,143,.07);color:var(--c-navy);}
+  .nav-cta{margin-left:6px;}
+  .nav-toggle{
+    display:none;width:40px;height:40px;border-radius:50%;border:none;
+    background:var(--surface);box-shadow:5px 5px 10px var(--shadow-dark),-5px -5px 10px var(--shadow-light);
+    position:relative;flex:none;
+  }
+  .nav-toggle span,.nav-toggle span::before,.nav-toggle span::after{
+    content:"";position:absolute;left:10px;right:10px;height:2px;background:var(--ink);border-radius:2px;transition:transform .3s ease,opacity .3s ease;
+  }
+  .nav-toggle span{top:19px;}
+  .nav-toggle span::before{content:"";top:-7px;}
+  .nav-toggle span::after{content:"";top:7px;}
+  .nav-toggle span::before,.nav-toggle span::after{left:0;right:0;position:absolute;}
+  .nav.open .nav-toggle span{background:transparent;}
+  .nav.open .nav-toggle span::before{transform:translateY(7px) rotate(45deg);}
+  .nav.open .nav-toggle span::after{transform:translateY(-7px) rotate(-45deg);}
+
+  /* ============================================================
+     HERO
+     ============================================================ */
+  .hero{padding-top:clamp(140px,18vw,180px);overflow:hidden;}
+  .hero-blob{
+    position:absolute;border-radius:50%;filter:blur(70px);z-index:-1;opacity:.55;
+  }
+  .hero-blob.b1{width:420px;height:420px;background:radial-gradient(circle,var(--c-macro-light),transparent 70%);top:-120px;right:-60px;}
+  .hero-blob.b2{width:460px;height:460px;background:radial-gradient(circle,var(--c-sky),transparent 70%);bottom:-180px;left:-140px;}
+
+  .hero-grid{
+    display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;
+  }
+  .hero-text h1{
+    font-size:clamp(2.6rem,5.4vw,4.1rem);
+    letter-spacing:-.01em;
+  }
+  .hero-tagline{
+    font-family:var(--f-display);
+    font-weight:500;
+    font-size:clamp(1.2rem,2vw,1.55rem);
+    color:var(--ink-soft);
+    margin-top:18px;
+    max-width:44ch;
+  }
+  .hero-tagline .word-photo{
+    background:linear-gradient(100deg,var(--c-macro-light),var(--c-macro));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    font-weight:700;
+  }
+  .hero-tagline .word-gov{
+    background:linear-gradient(100deg,var(--c-blue),var(--c-navy));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    font-weight:700;
+  }
+  .hero-body{margin-top:22px;max-width:52ch;font-size:1.02rem;}
+  .hero-actions{display:flex;flex-wrap:wrap;gap:14px;margin-top:34px;}
+  .scroll-cue{
+    margin-top:64px;display:flex;align-items:center;gap:12px;
+    font-family:var(--f-mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);
+  }
+  .scroll-cue .line{width:34px;height:1px;background:var(--ink-faint);position:relative;overflow:hidden;}
+  .scroll-cue .line::after{
+    content:"";position:absolute;left:-100%;top:0;bottom:0;width:100%;background:var(--c-navy);
+    animation:scrollLine 2.2s ease-in-out infinite;
+  }
+  @keyframes scrollLine{0%{left:-100%;}50%{left:100%;}100%{left:100%;}}
+
+  /* --- visual aperture --- */
+  .hero-visual{display:flex;justify-content:center;align-items:center;perspective:900px;}
+  .aperture{
+    position:relative;width:min(380px,80vw);aspect-ratio:1/1;
+    transform-style:preserve-3d;
+    animation:breathe 7s ease-in-out infinite;
+  }
+  @keyframes breathe{0%,100%{transform:scale(1);}50%{transform:scale(1.025);}}
+  .aperture-ring{
+    position:absolute;inset:0;border-radius:50%;
+    background:conic-gradient(from -20deg,var(--c-macro-light),var(--c-macro),var(--c-sky-pale),var(--c-sky),var(--c-blue),var(--c-navy),var(--c-macro-light));
+    box-shadow:14px 14px 30px var(--shadow-dark), -14px -14px 30px var(--shadow-light);
+  }
+  .aperture-glass{
+    position:absolute;inset:13%;border-radius:50%;
+    background:var(--glass-bg);
+    -webkit-backdrop-filter:blur(14px) saturate(160%);
+    backdrop-filter:blur(14px) saturate(160%);
+    border:1px solid var(--glass-border);
+  }
+  .aperture-blades{position:absolute;inset:13%;border-radius:50%;overflow:hidden;}
+  .aperture-blades svg{width:100%;height:100%;}
+  .aperture-core{
+    position:absolute;left:50%;top:50%;width:9%;height:9%;
+    transform:translate(-50%,-50%);border-radius:50%;
+    background:var(--c-navy);
+    box-shadow:0 0 0 6px rgba(255,255,255,.55);
+  }
+  .exif-chip{
+    position:absolute;
+    font-family:var(--f-mono);font-size:.72rem;color:var(--c-navy);
+    padding:7px 12px;border-radius:100px;
+    background:var(--glass-bg);
+    -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
+    border:1px solid var(--glass-border);
+    box-shadow:4px 4px 10px var(--shadow-dark);
+    animation:float 5s ease-in-out infinite;
+  }
+  .exif-chip.c1{top:2%;left:-6%;animation-delay:0s;}
+  .exif-chip.c2{top:14%;right:-10%;animation-delay:.6s;}
+  .exif-chip.c3{bottom:10%;left:-12%;animation-delay:1.2s;}
+  .exif-chip.c4{bottom:0%;right:-4%;animation-delay:1.8s;}
+  @keyframes float{0%,100%{transform:translateY(0);}50%{transform:translateY(-9px);}}
+
+  /* ============================================================
+     DUALITAS
+     ============================================================ */
+  .duality-head{max-width:62ch;margin-bottom:52px;}
+  .duality-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);}
+  .duality-head p{margin-top:16px;font-size:1.04rem;max-width:56ch;}
+  .duality-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px;position:relative;}
+  .duality-card{padding:40px 36px;position:relative;overflow:hidden;}
+  .duality-card.gov{
+    background:linear-gradient(155deg,var(--c-navy),#08186B);
+    color:var(--on-navy);
+    box-shadow:14px 14px 28px var(--shadow-dark-strong), -10px -10px 24px rgba(255,255,255,.5);
+  }
+  .duality-card.gov h3{color:var(--on-navy);}
+  .duality-card.gov p{color:var(--on-navy-soft);}
+  .duality-card.photo{
+    background:var(--glass-bg);
+    -webkit-backdrop-filter:blur(20px) saturate(170%);
+    backdrop-filter:blur(20px) saturate(170%);
+    border:1px solid var(--glass-border);
+  }
+  .duality-icon{
+    width:52px;height:52px;border-radius:16px;
+    display:flex;align-items:center;justify-content:center;
+    margin-bottom:22px;
+  }
+  .duality-card.gov .duality-icon{background:rgba(255,255,255,.12);}
+  .duality-card.photo .duality-icon{background:linear-gradient(120deg,var(--c-macro-light),var(--c-macro));}
+  .duality-card h3{font-size:1.5rem;margin-bottom:12px;}
+  .duality-card p.desc{margin-bottom:22px;font-size:.98rem;}
+
+  /* ============================================================
+     GALERI / KARYA
+     ============================================================ */
+  .gallery-head{
+    display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:40px;
+  }
+  .gallery-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);}
+  .gallery-head p{margin-top:14px;max-width:44ch;}
+  .filter-tabs{display:flex;gap:8px;padding:6px;border-radius:100px;background:var(--surface);
+    box-shadow:inset 5px 5px 12px var(--shadow-dark), inset -5px -5px 12px var(--shadow-light);}
+  .filter-btn{
+    border:none;background:transparent;padding:10px 20px;border-radius:100px;
+    font-size:.86rem;font-weight:600;color:var(--ink-soft);
+    transition:background .3s ease,color .3s ease,box-shadow .3s ease;
+  }
+  .filter-btn.active{
+    background:linear-gradient(120deg,var(--c-sky),var(--c-blue));
+    color:#fff;
+    box-shadow:4px 4px 10px var(--shadow-dark);
+  }
+  .gallery-grid{
+    display:grid;grid-template-columns:repeat(3,1fr);gap:24px;
+  }
+  .photo-card{border-radius:var(--radius-md);transition:opacity .4s ease, transform .4s ease;}
+  .photo-card.hidden-item{display:none;}
+  .photo-frame{
+    position:relative;border-radius:var(--radius-md);overflow:hidden;aspect-ratio:4/5;
+    border:1px solid var(--glass-border);
+    box-shadow:8px 8px 18px var(--shadow-dark), -6px -6px 16px var(--shadow-light);
+  }
+  .photo-surface{
+    position:absolute;inset:0;
+    filter:blur(3px) brightness(.96);
+    transform:scale(1.06);
+    transition:filter .6s ease, transform .6s ease;
+  }
+  .photo-frame:hover .photo-surface,.photo-frame:focus-within .photo-surface{
+    filter:blur(0) brightness(1.02);
+    transform:scale(1);
+  }
+  .ph-landscape{background:linear-gradient(160deg,var(--c-sky-pale) 0%,var(--c-sky) 45%,var(--c-blue) 78%,var(--c-navy) 100%);}
+  .ph-landscape::after{
+    content:"";position:absolute;left:0;right:0;bottom:0;height:38%;
+    background:rgba(255,255,255,.22);
+    clip-path:polygon(0% 100%,0% 62%,14% 44%,28% 60%,44% 30%,58% 52%,74% 36%,88% 58%,100% 46%,100% 100%);
+  }
+  .ph-macro{
+    background:
+      radial-gradient(circle at 22% 28%, rgba(255,255,255,.55) 0%, transparent 9%),
+      radial-gradient(circle at 68% 62%, rgba(255,255,255,.45) 0%, transparent 11%),
+      radial-gradient(circle at 46% 82%, rgba(255,255,255,.35) 0%, transparent 7%),
+      radial-gradient(circle at 82% 20%, rgba(255,255,255,.3) 0%, transparent 6%),
+      linear-gradient(135deg,var(--c-macro-light),var(--c-macro));
+  }
+  .photo-overlay{
+    position:absolute;left:0;right:0;bottom:0;padding:20px;
+    background:linear-gradient(0deg,rgba(4,44,143,.55),transparent 70%);
+  }
+  .photo-badge{
+    font-family:var(--f-mono);font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;
+    background:rgba(255,255,255,.22);color:#fff;padding:5px 11px;border-radius:100px;
+    -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+  }
+  .photo-title{color:#fff;font-family:var(--f-display);font-size:1.08rem;margin-top:10px;}
+  .photo-exif{color:rgba(255,255,255,.85);font-family:var(--f-mono);font-size:.72rem;margin-top:5px;}
+  .photo-hint{
+    position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+    background:rgba(4,44,143,.28);color:#fff;font-family:var(--f-mono);font-size:.78rem;
+    opacity:0;transition:opacity .35s ease;text-align:center;padding:20px;
+  }
+  .photo-frame:hover .photo-hint,.photo-frame:focus-within .photo-hint{opacity:1;}
+
+  /* ============================================================
+     PENGALAMAN
+     ============================================================ */
+  .exp-head{max-width:60ch;margin-bottom:52px;}
+  .exp-head h2{font-size:clamp(1.9rem,3.6vw,2.7rem);}
+  .exp-head p{margin-top:14px;}
+  .timeline{position:relative;padding-left:38px;}
+  .timeline::before{
+    content:"";position:absolute;left:9px;top:6px;bottom:6px;width:2px;
+    background:linear-gradient(180deg,var(--c-sky),var(--c-blue),var(--c-navy));
+    border-radius:2px;
+  }
+  .timeline-item{position:relative;padding-bottom:40px;}
+  .timeline-item:last-child{padding-bottom:0;}
+  .timeline-dot{
+    position:absolute;left:-38px;top:6px;width:20px;height:20px;border-radius:50%;
+    background:var(--surface);
+    box-shadow:4px 4px 10px var(--shadow-dark), -4px -4px 10px var(--shadow-light);
+  }
+  .timeline-dot::after{content:"";position:absolute;inset:5px;border-radius:50%;background:var(--c-navy);}
+  .timeline-date{
+    font-family:var(--f-mono);font-size:.76rem;color:var(--c-navy);letter-spacing:.04em;margin-bottom:10px;display:block;
+  }
+  .timeline-card{padding:28px 30px;}
+  .timeline-card h3{font-size:1.22rem;margin-bottom:4px;}
+  .timeline-org{color:var(--ink-faint);font-size:.9rem;margin-bottom:14px;display:block;}
+  .timeline-card p.desc{font-size:.96rem;margin-bottom:18px;}
+
+  /* ============================================================
+     KONTAK / FOOTER
+     ============================================================ */
+  .contact-card{
+    padding:clamp(40px,6vw,64px);text-align:center;
+    display:flex;flex-direction:column;align-items:center;
+  }
+  .contact-card h2{font-size:clamp(2rem,4vw,2.8rem);max-width:20ch;}
+  .contact-card p{margin-top:16px;max-width:48ch;font-size:1.02rem;}
+  .contact-actions{display:flex;flex-wrap:wrap;justify-content:center;gap:14px;margin-top:30px;}
+  .social-row{display:flex;gap:14px;margin-top:36px;}
+  .social-btn{
+    width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+    background:var(--surface);box-shadow:6px 6px 14px var(--shadow-dark), -6px -6px 14px var(--shadow-light);
+    color:var(--c-navy);transition:transform .3s ease,box-shadow .3s ease;border:none;
+  }
+  .social-btn:hover{transform:translateY(-3px);box-shadow:8px 8px 18px var(--shadow-dark-strong), -6px -6px 14px var(--shadow-light);}
+
+  .site-footer{padding-block:34px;}
+  .footer-inner{
+    display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;
+    font-size:.84rem;color:var(--ink-faint);
+  }
+  .footer-inner .brand{font-size:.9rem;}
+
+  /* ============================================================
+     RESPONSIVE
+     ============================================================ */
+  @media (max-width:980px){
+    .hero-grid{grid-template-columns:1fr;}
+    .hero-visual{order:-1;margin-bottom:10px;}
+    .aperture{width:min(300px,68vw);}
+    .duality-grid{grid-template-columns:1fr;}
+    .gallery-grid{grid-template-columns:repeat(2,1fr);}
+  }
+  @media (max-width:760px){
+    .nav-links{
+      position:absolute;top:calc(100% + 12px);left:0;right:0;
+      flex-direction:column;align-items:stretch;gap:4px;
+      background:var(--glass-bg);-webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
+      border:1px solid var(--glass-border);border-radius:20px;padding:14px;
+      box-shadow:var(--glass-shadow);
+      opacity:0;pointer-events:none;transform:translateY(-8px);transition:opacity .3s ease,transform .3s ease;
+    }
+    .nav.open .nav-links{opacity:1;pointer-events:auto;transform:translateY(0);}
+    .nav-links a{padding:12px 16px;}
+    .nav-cta{margin-left:0;margin-top:6px;}
+    .nav-toggle{display:block;}
+    .gallery-head{flex-direction:column;align-items:flex-start;}
+  }
+  @media (max-width:560px){
+    .gallery-grid{grid-template-columns:1fr;}
+    .exif-chip{display:none;}
+    .duality-card{padding:30px 24px;}
+    .timeline{padding-left:30px;}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    *{animation-duration:.01ms !important;animation-iteration-count:1 !important;transition-duration:.01ms !important;scroll-behavior:auto !important;}
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Langsung ke konten utama</a>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="siteNav">
+  <div class="nav-inner">
+    <a href="#beranda" class="brand">
+      <span class="logo-mark" aria-hidden="true"></span>
+      Nama Anda
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="#beranda">Beranda</a>
+      <a href="#profil">Profil</a>
+      <a href="#karya">Karya</a>
+      <a href="#pengalaman">Pengalaman</a>
+      <a href="#kontak" class="btn btn-gov nav-cta">Hubungi Saya</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ HERO ============ -->
+  <section id="beranda" class="hero">
+    <span class="hero-blob b1" aria-hidden="true"></span>
+    <span class="hero-blob b2" aria-hidden="true"></span>
+    <div class="container hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow">Fotografi Landscape &amp; Macro · Kebijakan Publik</span>
+        <h1>Nama Anda</h1>
+        <p class="hero-tagline">
+          Memotret <span class="word-photo">cahaya</span> di alam liar,
+          merancang <span class="word-gov">kebijakan</span> di ruang sidang.
+        </p>
+        <p class="hero-body">
+          Saya adalah <strong>[Jabatan Anda]</strong> yang berkecimpung dalam penyusunan
+          kebijakan dan regulasi daerah — sekaligus fotografer yang mengejar cahaya pagi
+          di lanskap luas dan detail kecil dunia macro. Dua dunia, satu cara memandang:
+          mendetail, sabar, dan penuh perhatian pada apa yang sering terlewat.
+        </p>
+        <div class="hero-actions">
+          <a href="#karya" class="btn btn-photo">Lihat Karya Foto →</a>
+          <a href="#pengalaman" class="btn btn-ghost glass">Rekam Jejak Karier</a>
+        </div>
+        <div class="scroll-cue"><span class="line"></span> Gulir untuk menjelajah</div>
+      </div>
+
+      <div class="hero-visual">
+        <div class="aperture" id="apertureEl" aria-hidden="true">
+          <div class="aperture-ring"></div>
+          <div class="aperture-glass"></div>
+          <div class="aperture-blades">
+            <svg viewBox="0 0 280 280">
+              <g stroke="rgba(4,44,143,.28)" stroke-width="1.4">
+                <line x1="140" y1="140" x2="140" y2="10"/>
+                <line x1="140" y1="140" x2="140" y2="10" transform="rotate(30 140 140)"/>
+                <line x1="140" y1="140" x2="140" y2="10" transform="rotate(60 140 140)"/>
+                <line x1="140" y1="140" x2="140" y2="10" transform="rotate(90 140 140)"/>
+                <line x1="140" y1="140" x2="140" y2="10" transform="rotate(120 140 140)"/>
+                <line x1="140" y1="140" x2="140" y2="10" transform="rotate(150 140 140)"/>
+                <line x1="140" y1="140" x2="140" y2="10" transform="rotate(180 140 140)"/>
+                <line x1="140" y1="140" x2="140" y2="10" transform="rotate(210 140 140)"/>
+                <line x1="140" y1="140" x2="140" y2="10" transform="rotate(240 140 140)"/>
+                <line x1="140" y1="140" x2="140" y2="10" transform="rotate(270 140 140)"/>
+                <line x1="140" y1="140" x2="140" y2="10" transform="rotate(300 140 140)"/>
+                <line x1="140" y1="140" x2="140" y2="10" transform="rotate(330 140 140)"/>
+              </g>
+            </svg>
+          </div>
+          <div class="aperture-core"></div>
+          <span class="exif-chip c1">f/2.8</span>
+          <span class="exif-chip c2">24mm</span>
+          <span class="exif-chip c3">ISO 100</span>
+          <span class="exif-chip c4">1/500s</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DUALITAS ============ -->
+  <section id="profil">
+    <div class="container">
+      <div class="duality-head reveal">
+        <span class="eyebrow">Dua Sisi, Satu Fokus</span>
+        <h2>Presisi di balik lensa, presisi di balik kebijakan.</h2>
+        <p>Latar belakang di pemerintahan mengajarkan saya membaca detail dalam
+          setiap pasal. Fotografi mengajarkan saya membaca detail dalam setiap cahaya.</p>
+      </div>
+
+      <div class="duality-grid">
+        <article class="duality-card gov neu reveal">
+          <div class="duality-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EAF3FF" stroke-width="1.8">
+              <path d="M4 21h16M6 21V9l6-4 6 4v12M9 21v-6h6v6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Sisi Pemerintahan</h3>
+          <p class="desc">
+            Berpengalaman dalam penyusunan dan analisis kebijakan daerah — mulai dari
+            kajian regulasi hingga penyusunan draf peraturan yang implementatif dan
+            selaras dengan peraturan perundang-undangan yang lebih tinggi.
+          </p>
+          <div class="tag-row">
+            <span class="tag on-navy">Penyusunan Perda &amp; Raperda</span>
+            <span class="tag on-navy">Riset Kebijakan Publik</span>
+            <span class="tag on-navy">Analisis Regulasi Daerah</span>
+          </div>
+        </article>
+
+        <article class="duality-card photo glass reveal">
+          <div class="duality-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#042C8F" stroke-width="1.8">
+              <path d="M4 8h3l1.5-2h7L17 8h3v11H4V8Z" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="12" cy="13.5" r="3.4"/>
+            </svg>
+          </div>
+          <h3>Sisi Fotografi</h3>
+          <p class="desc">
+            Mengabadikan skala luas lanskap dan detail intim dunia mikro — dari
+            kabut pagi di pegunungan hingga tetes embun di kelopak bunga.
+          </p>
+          <div class="tag-row">
+            <span class="tag on-glass">Landscape Photography</span>
+            <span class="tag on-glass">Macro Photography</span>
+            <span class="tag on-glass">Pemburu Golden Hour</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ KARYA / GALERI ============ -->
+  <section id="karya">
+    <div class="container">
+      <div class="gallery-head reveal">
+        <div>
+          <span class="eyebrow">Portofolio</span>
+          <h2>Karya Terpilih</h2>
+          <p>Sebagian kecil dari perjalanan visual saya — perbesar detail, perluas cakrawala.</p>
+        </div>
+        <div class="filter-tabs" role="tablist" aria-label="Filter kategori foto">
+          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">Semua</button>
+          <button class="filter-btn" data-filter="landscape" role="tab" aria-selected="false">Landscape</button>
+          <button class="filter-btn" data-filter="macro" role="tab" aria-selected="false">Macro</button>
+        </div>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid">
+
+        <article class="photo-card reveal" data-category="landscape">
+          <div class="photo-frame" tabindex="0">
+            <div class="photo-surface ph-landscape"></div>
+            <div class="photo-overlay">
+              <span class="photo-badge">Landscape</span>
+              <h3 class="photo-title">Kabut Pagi, [Nama Lokasi]</h3>
+              <p class="photo-exif">f/11 · 24mm · 1/60s · ISO 100</p>
+            </div>
+            <div class="photo-hint">Ganti dengan foto Anda</div>
+          </div>
+        </article>
+
+        <article class="photo-card reveal" data-category="macro">
+          <div class="photo-frame" tabindex="0">
+            <div class="photo-surface ph-macro"></div>
+            <div class="photo-overlay">
+              <span class="photo-badge">Macro</span>
+              <h3 class="photo-title">Embun di Kelopak</h3>
+              <p class="photo-exif">f/4.5 · 100mm · 1/250s · ISO 200</p>
+            </div>
+            <div class="photo-hint">Ganti dengan foto Anda</div>
+          </div>
+        </article>
+
+        <article class="photo-card reveal" data-category="landscape">
+          <div class="photo-frame" tabindex="0">
+            <div class="photo-surface ph-landscape"></div>
+            <div class="photo-overlay">
+              <span class="photo-badge">Landscape</span>
+              <h3 class="photo-title">Garis Cakrawala, [Nama Lokasi]</h3>
+              <p class="photo-exif">f/9 · 16mm · 1/125s · ISO 100</p>
+            </div>
+            <div class="photo-hint">Ganti dengan foto Anda</div>
+          </div>
+        </article>
+
+        <article class="photo-card reveal" data-category="macro">
+          <div class="photo-frame" tabindex="0">
+            <div class="photo-surface ph-macro"></div>
+            <div class="photo-overlay">
+              <span class="photo-badge">Macro</span>
+              <h3 class="photo-title">Tekstur Sayap Kupu-kupu</h3>
+              <p class="photo-exif">f/5.6 · 90mm · 1/320s · ISO 400</p>
+            </div>
+            <div class="photo-hint">Ganti dengan foto Anda</div>
+          </div>
+        </article>
+
+        <article class="photo-card reveal" data-category="landscape">
+          <div class="photo-frame" tabindex="0">
+            <div class="photo-surface ph-landscape"></div>
+            <div class="photo-overlay">
+              <span class="photo-badge">Landscape</span>
+              <h3 class="photo-title">Ombak Senja, [Nama Lokasi]</h3>
+              <p class="photo-exif">f/13 · 20mm · 2s · ISO 100</p>
+            </div>
+            <div class="photo-hint">Ganti dengan foto Anda</div>
+          </div>
+        </article>
+
+        <article class="photo-card reveal" data-category="macro">
+          <div class="photo-frame" tabindex="0">
+            <div class="photo-surface ph-macro"></div>
+            <div class="photo-overlay">
+              <span class="photo-badge">Macro</span>
+              <h3 class="photo-title">Pola Alami Daun</h3>
+              <p class="photo-exif">f/6.3 · 60mm · 1/200s · ISO 160</p>
+            </div>
+            <div class="photo-hint">Ganti dengan foto Anda</div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PENGALAMAN ============ -->
+  <section id="pengalaman">
+    <div class="container">
+      <div class="exp-head reveal">
+        <span class="eyebrow">Rekam Jejak</span>
+        <h2>Pengalaman Profesional</h2>
+        <p>Perjalanan karier di bidang pemerintahan, kebijakan, dan regulasi daerah.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="timeline-item reveal">
+          <span class="timeline-dot" aria-hidden="true"></span>
+          <span class="timeline-date">[20XX — Sekarang]</span>
+          <div class="timeline-card neu">
+            <h3>[Jabatan Anda]</h3>
+            <span class="timeline-org">[Nama Instansi]</span>
+            <p class="desc">
+              Terlibat dalam penyusunan dan pengharmonisasian rancangan peraturan
+              daerah (Raperda), termasuk kajian kesesuaian norma terhadap peraturan
+              perundang-undangan yang lebih tinggi.
+            </p>
+            <div class="tag-row">
+              <span class="tag on-glass">Legal Drafting</span>
+              <span class="tag on-glass">Harmonisasi Regulasi</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <span class="timeline-dot" aria-hidden="true"></span>
+          <span class="timeline-date">[20XX — 20XX]</span>
+          <div class="timeline-card neu">
+            <h3>[Jabatan Anda]</h3>
+            <span class="timeline-org">[Nama Instansi]</span>
+            <p class="desc">
+              Melakukan riset dan analisis kebijakan publik, termasuk penyusunan
+              pedoman wawancara dan koordinasi dengan pemangku kepentingan lintas sektor.
+            </p>
+            <div class="tag-row">
+              <span class="tag on-glass">Riset Kebijakan</span>
+              <span class="tag on-glass">Stakeholder Engagement</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="timeline-item reveal">
+          <span class="timeline-dot" aria-hidden="true"></span>
+          <span class="timeline-date">[20XX — 20XX]</span>
+          <div class="timeline-card neu">
+            <h3>[Jabatan Anda]</h3>
+            <span class="timeline-org">[Nama Instansi]</span>
+            <p class="desc">
+              Mendukung kajian regulasi sektor energi daerah, mencakup studi
+              implementasi dan evaluasi program strategis.
+            </p>
+            <div class="tag-row">
+              <span class="tag on-glass">Kajian Regulasi</span>
+              <span class="tag on-glass">Energi &amp; Keberlanjutan</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ KONTAK ============ -->
+  <section id="kontak">
+    <div class="container">
+      <div class="contact-card glass reveal">
+        <span class="eyebrow">Mari Terhubung</span>
+        <h2>Tertarik berkolaborasi?</h2>
+        <p>Baik untuk proyek fotografi, kolaborasi visual, atau diskusi kebijakan
+          publik — kotak masuk saya selalu terbuka.</p>
+        <div class="contact-actions">
+          <a href="mailto:nama@email.com" class="btn btn-gov">Kirim Email</a>
+          <a href="#karya" class="btn btn-ghost glass">Lihat Portofolio</a>
+        </div>
+        <div class="social-row">
+          <a href="#" class="social-btn neu-sm" aria-label="Instagram">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1"/></svg>
+          </a>
+          <a href="#" class="social-btn neu-sm" aria-label="LinkedIn">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="18" height="18" rx="3"/><line x1="8" y1="11" x2="8" y2="17"/><line x1="8" y1="7.5" x2="8" y2="7.6"/><path d="M12 17v-3.2a2.3 2.3 0 0 1 4.6 0V17"/></svg>
+          </a>
+          <a href="#" class="social-btn neu-sm" aria-label="Behance">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 7h6.5a2.3 2.3 0 0 1 0 4.6H3z"/><path d="M3 11.6h7a2.5 2.5 0 0 1 0 5H3z"/><path d="M14.5 12.2h6.3c0-2.6-1.4-4.2-3.3-4.2-2.2 0-3.6 1.7-3.6 4.4 0 2.8 1.5 4.4 3.7 4.4 1.5 0 2.6-.7 3.1-2"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <span class="brand"><span class="logo-mark" aria-hidden="true"></span> Nama Anda</span>
+    <span>© 2026 Nama Anda. Dibuat dengan ketelitian seorang fotografer dan kecermatan seorang penyusun kebijakan.</span>
+  </div>
+</footer>
+
+<script>
+  // ---------- Nav toggle (mobile) ----------
+  const nav = document.getElementById('siteNav');
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  navToggle.addEventListener('click', () => {
+    const isOpen = nav.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => {
+    nav.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+  }));
+
+  // ---------- Nav shadow on scroll ----------
+  const onScroll = () => {
+    nav.classList.toggle('scrolled', window.scrollY > 12);
+  };
+  document.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // ---------- Reveal on scroll ----------
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  }
+
+  // ---------- Gallery filter ----------
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const photoCards = document.querySelectorAll('.photo-card');
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => { b.classList.remove('active'); b.setAttribute('aria-selected', 'false'); });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      const filter = btn.dataset.filter;
+      photoCards.forEach(card => {
+        const match = filter === 'all' || card.dataset.category === filter;
+        card.classList.toggle('hidden-item', !match);
+      });
+    });
+  });
+
+  // ---------- Aperture parallax (subtle, pointer devices only) ----------
+  const aperture = document.getElementById('apertureEl');
+  const heroVisual = document.querySelector('.hero-visual');
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const isFinePointer = window.matchMedia('(pointer: fine)').matches;
+
+  if (aperture && heroVisual && !prefersReduced && isFinePointer) {
+    heroVisual.addEventListener('mousemove', (e) => {
+      const rect = heroVisual.getBoundingClientRect();
+      const x = (e.clientX - rect.left) / rect.width - 0.5;
+      const y = (e.clientY - rect.top) / rect.height - 0.5;
+      aperture.style.transform = `rotateY(${x * 14}deg) rotateX(${-y * 14}deg)`;
+    });
+    heroVisual.addEventListener('mouseleave', () => {
+      aperture.style.transform = 'rotateY(0deg) rotateX(0deg)';
+    });
+  }
+</script>
+</body>
+</html>
