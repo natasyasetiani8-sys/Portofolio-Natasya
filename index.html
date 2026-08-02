@@ -41,7 +41,10 @@
     --c-navy:#042C8F;
 
     /* permukaan */
-    --bg:#F0E68C;
+    --bg-start:#84BF93;
+    --bg-mid:#2961B1;
+    --bg-end:#AED9C5;
+    --bg:linear-gradient(135deg, var(--bg-start) 0%, var(--bg-mid) 50%, var(--bg-end) 100%);
     --surface:#F5FAFF;
     --surface-2:#E7F1FC;
 
@@ -78,13 +81,35 @@
   html{scroll-behavior:smooth;}
   body{
     margin:0;
+    min-height:100vh;
     background:var(--bg);
+    background-size:200% 200%;
     color:var(--ink-soft);
     font-family:var(--f-body);
     font-size:16px;
     line-height:1.65;
     -webkit-font-smoothing:antialiased;
     overflow-x:hidden;
+    animation:backgroundShift 12s ease infinite;
+    position:relative;
+  }
+  body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle at top left, rgba(255,255,255,.28), transparent 45%);
+    pointer-events:none;
+    z-index:-1;
+    animation:backgroundPulse 8s ease-in-out infinite;
+  }
+  @keyframes backgroundShift{
+    0%{background-position:0% 50%;}
+    50%{background-position:100% 50%;}
+    100%{background-position:0% 50%;}
+  }
+  @keyframes backgroundPulse{
+    0%,100%{opacity:.65;transform:scale(1);} 
+    50%{opacity:1;transform:scale(1.04);} 
   }
   ::selection{background:var(--c-sky);color:var(--ink);}
   a{color:inherit;text-decoration:none;}
