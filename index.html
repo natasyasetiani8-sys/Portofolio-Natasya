@@ -274,22 +274,12 @@
   .nav-links{display:flex;align-items:center;gap:6px;}
   .nav-links a{
     padding:9px 16px;border-radius:100px;font-size:.9rem;font-weight:500;color:var(--ink-soft);
-    transition:transform .25s ease, background .25s ease, color .25s ease, box-shadow .25s ease;
+    transition:background .25s ease,color .25s ease;
   }
-  .nav-links a:hover,
-  .nav-links a:focus-visible{
-    transform:translateY(-1px);
-    box-shadow:0 8px 18px rgba(4,44,143,.12);
-  }
-  .nav-link-home{background:linear-gradient(135deg, rgba(232,249,87,.34), rgba(187,225,26,.22));color:var(--ink);}
-  .nav-link-profile{background:linear-gradient(135deg, rgba(193,229,251,.42), rgba(134,208,253,.24));color:var(--c-navy);}
-  .nav-link-featured{background:linear-gradient(135deg, rgba(72,145,231,.18), rgba(4,44,143,.12));color:var(--c-navy);}
-  .nav-link-work{background:linear-gradient(135deg, rgba(174,217,197,.42), rgba(132,191,147,.24));color:var(--ink);}
-  .nav-link-experiences{background:linear-gradient(135deg, rgba(255,255,255,.5), rgba(231,241,252,.7));color:var(--ink);}
-  .nav-link-contact{background:linear-gradient(135deg, var(--c-blue), var(--c-navy));color:var(--on-navy);}
+  .nav-links a:hover{background:rgba(4,44,143,.07);color:var(--c-navy);}
   .nav-links a.active{
-    outline:1px solid rgba(4,44,143,.18);
-    box-shadow:0 10px 22px rgba(4,44,143,.14);
+    background:rgba(4,44,143,.07);
+    color:var(--c-navy);
     font-weight:700;
   }
   .nav-cta{margin-left:6px;}
@@ -313,6 +303,12 @@
      HERO
      ============================================================ */
   .hero{padding-top:clamp(140px,18vw,180px);overflow:hidden;}
+  section.section-home{background:linear-gradient(135deg, rgba(232,249,87,.18), rgba(193,229,251,.16));}
+  section.section-profile{background:linear-gradient(135deg, rgba(193,229,251,.24), rgba(255,255,255,.2));}
+  section.section-featured{background:linear-gradient(135deg, rgba(72,145,231,.16), rgba(4,44,143,.1));}
+  section.section-work{background:linear-gradient(135deg, rgba(174,217,197,.24), rgba(232,249,87,.14));}
+  section.section-experiences{background:linear-gradient(135deg, rgba(255,255,255,.35), rgba(231,241,252,.6));}
+  section.section-contact{background:linear-gradient(135deg, rgba(4,44,143,.12), rgba(72,145,231,.18));}
   .hero-blob{
     position:absolute;border-radius:50%;filter:blur(70px);z-index:-1;opacity:.55;
   }
@@ -638,12 +634,12 @@
       Natasya Okta Setiani
     </a>
     <nav class="nav-links" id="navLinks">
-      <a href="#beranda" class="nav-link-home">Home</a>
-      <a href="#profil" class="nav-link-profile">Profile</a>
-      <a href="#featured-project" class="nav-link-featured">Featured Project</a>
-      <a href="#karya" class="nav-link-work">Work</a>
-      <a href="#pengalaman" class="nav-link-experiences">Experiences</a>
-      <a href="#kontak" class="btn btn-gov nav-cta nav-link-contact">Contact Me</a>
+      <a href="#beranda">Home</a>
+      <a href="#profil">Profile</a>
+      <a href="#featured-project">Featured Project</a>
+      <a href="#karya">Work</a>
+      <a href="#pengalaman">Experiences</a>
+      <a href="#kontak" class="btn btn-gov nav-cta">Contact Me</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false" aria-controls="navLinks">
       <span></span>
@@ -654,7 +650,7 @@
 <main id="main">
 
   <!-- ============ HERO ============ -->
-  <section id="beranda" class="hero">
+  <section id="beranda" class="hero section-home">
     <span class="hero-blob b1" aria-hidden="true"></span>
     <span class="hero-blob b2" aria-hidden="true"></span>
     <div class="container hero-grid">
@@ -704,7 +700,7 @@
   </section>
 
   <!-- ============ DUALITAS ============ -->
-  <section id="profil">
+  <section id="profil" class="section-profile">
     <div class="container">
       <div class="duality-head reveal">
         <span class="eyebrow">Educational Background</span>
@@ -758,7 +754,7 @@
   </section>
 
   <!-- ============ FEATURED PROJECT ============ -->
-  <section id="featured-project" style="padding-top:clamp(70px,9vw,110px);">
+  <section id="featured-project" class="section-featured" style="padding-top:clamp(70px,9vw,110px);">
     <div class="container">
       <div class="gallery-head reveal">
         <div>
@@ -810,7 +806,7 @@
   </section>
 
   <!-- ============ KARYA / GALERI ============ -->
-  <section id="karya">
+  <section id="karya" class="section-work">
     <div class="container">
       <div class="gallery-head reveal">
         <div>
@@ -942,7 +938,7 @@
   </section>
 
   <!-- ============ PENGALAMAN ============ -->
-  <section id="pengalaman">
+  <section id="pengalaman" class="section-experiences">
     <div class="container">
       <div class="exp-head reveal">
         <span class="eyebrow">Track Record</span>
@@ -1117,7 +1113,7 @@
   </section>
 
   <!-- ============ KONTAK ============ -->
-  <section id="kontak">
+  <section id="kontak" class="section-contact">
     <div class="container">
       <div class="contact-card glass reveal">
         <span class="eyebrow">Let’s Connect</span>
