@@ -274,9 +274,24 @@
   .nav-links{display:flex;align-items:center;gap:6px;}
   .nav-links a{
     padding:9px 16px;border-radius:100px;font-size:.9rem;font-weight:500;color:var(--ink-soft);
-    transition:background .25s ease,color .25s ease;
+    transition:transform .25s ease, background .25s ease, color .25s ease, box-shadow .25s ease;
   }
-  .nav-links a:hover{background:rgba(4,44,143,.07);color:var(--c-navy);}
+  .nav-links a:hover,
+  .nav-links a:focus-visible{
+    transform:translateY(-1px);
+    box-shadow:0 8px 18px rgba(4,44,143,.12);
+  }
+  .nav-link-home{background:linear-gradient(135deg, rgba(232,249,87,.34), rgba(187,225,26,.22));color:var(--ink);}
+  .nav-link-profile{background:linear-gradient(135deg, rgba(193,229,251,.42), rgba(134,208,253,.24));color:var(--c-navy);}
+  .nav-link-featured{background:linear-gradient(135deg, rgba(72,145,231,.18), rgba(4,44,143,.12));color:var(--c-navy);}
+  .nav-link-work{background:linear-gradient(135deg, rgba(174,217,197,.42), rgba(132,191,147,.24));color:var(--ink);}
+  .nav-link-experiences{background:linear-gradient(135deg, rgba(255,255,255,.5), rgba(231,241,252,.7));color:var(--ink);}
+  .nav-link-contact{background:linear-gradient(135deg, var(--c-blue), var(--c-navy));color:var(--on-navy);}
+  .nav-links a.active{
+    outline:1px solid rgba(4,44,143,.18);
+    box-shadow:0 10px 22px rgba(4,44,143,.14);
+    font-weight:700;
+  }
   .nav-cta{margin-left:6px;}
   .nav-toggle{
     display:none;width:40px;height:40px;border-radius:50%;border:none;
@@ -623,12 +638,12 @@
       Natasya Okta Setiani
     </a>
     <nav class="nav-links" id="navLinks">
-      <a href="#beranda">Home</a>
-      <a href="#profil">Profile</a>
-      <a href="#featured-project">Featured Project</a>
-      <a href="#karya">Work</a>
-      <a href="#pengalaman">Experiences</a>
-      <a href="#kontak" class="btn btn-gov nav-cta">Contact Me</a>
+      <a href="#beranda" class="nav-link-home">Home</a>
+      <a href="#profil" class="nav-link-profile">Profile</a>
+      <a href="#featured-project" class="nav-link-featured">Featured Project</a>
+      <a href="#karya" class="nav-link-work">Work</a>
+      <a href="#pengalaman" class="nav-link-experiences">Experiences</a>
+      <a href="#kontak" class="btn btn-gov nav-cta nav-link-contact">Contact Me</a>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false" aria-controls="navLinks">
       <span></span>
@@ -1160,6 +1175,32 @@
   };
   document.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
+
+  // ---------- Active nav state by section ----------
+  const sectionIds = ['beranda', 'profil', 'featured-project', 'karya', 'pengalaman', 'kontak'];
+  const navItems = Array.from(navLinks.querySelectorAll('a'));
+
+  const setActiveNav = () => {
+    const scrollPosition = window.scrollY + 140;
+    let activeId = 'beranda';
+
+    sectionIds.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section && scrollPosition >= section.offsetTop) {
+        activeId = id;
+      }
+    });
+
+    navItems.forEach((item) => {
+      const href = item.getAttribute('href');
+      const isActive = href === `#${activeId}`;
+      item.classList.toggle('active', isActive);
+    });
+  };
+
+  window.addEventListener('scroll', setActiveNav, { passive: true });
+  window.addEventListener('load', setActiveNav);
+  setActiveNav();
 
   // ---------- Reveal on scroll ----------
   const revealEls = document.querySelectorAll('.reveal');
