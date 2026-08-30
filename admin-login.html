@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login</title>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: linear-gradient(135deg, #eaf2ff, #f7f9fc);
+      font-family: Arial, sans-serif;
+    }
+    .card {
+      width: min(420px, 90vw);
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 20px 40px rgba(4, 44, 143, 0.12);
+      padding: 28px;
+    }
+    h1 { margin-top: 0; }
+    label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 700;
+    }
+    input, button {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid #dfe7f2;
+      font: inherit;
+      margin-bottom: 16px;
+    }
+    button {
+      background: #042c8f;
+      color: white;
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+    }
+    .alert {
+      padding: 10px 12px;
+      background: #fff0f0;
+      color: #b63434;
+      border-radius: 8px;
+      display: none;
+      margin-bottom: 16px;
+    }
+    .alert.show { display: block; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Admin Login</h1>
+    <div id="alert" class="alert"></div>
+    <form id="loginForm">
+      <label for="username">Username</label>
+      <input id="username" name="username" value="admin" readonly />
+
+      <label for="password">Password</label>
+      <input id="password" name="password" type="password" placeholder="Masukkan password" required />
+
+      <button type="submit">Login</button>
+    </form>
+  </div>
+
+  <script>
+    const form = document.getElementById('loginForm');
+    const alertBox = document.getElementById('alert');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const password = document.getElementById('password').value;
+
+      try {
+        const response = await fetch('/api/admin-login', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ username: 'admin', password })
+        });
+
+        const result = await response.json();
+        if (!response.ok) {
+          throw new Error(result.message || 'Login gagal');
+        }
+
+        sessionStorage.setItem('portfolio_admin_token', result.token);
+        window.location.href = '/admin.html';
+      } catch (err) {
+        alertBox.textContent = err.message;
+        alertBox.classList.add('show');
+      }
+    });
+  </script>
+</body>
+</html>

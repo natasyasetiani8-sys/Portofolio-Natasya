@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portfolio Admin</title>
+  <style>
+    :root {
+      --bg: #eef4ff;
+      --card: #ffffff;
+      --text: #13263d;
+      --muted: #5c7188;
+      --primary: #042c8f;
+      --primary-soft: #eaf2ff;
+      --success: #1b9a63;
+      --danger: #d14d4d;
+      --warning: #f4b740;
+      --border: #dfeaf7;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    .container { max-width: 1280px; margin: 0 auto; padding: 32px 20px; }
+    header {
+      background: linear-gradient(135deg, #042c8f, #204ec7);
+      color: white;
+      padding: 24px 0;
+      margin-bottom: 26px;
+    }
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    h1 { margin: 0; }
+    .dashboard {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(180px, 1fr));
+      gap: 18px;
+      margin-bottom: 26px;
+    }
+    .stat-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 10px 32px rgba(18, 38, 58, 0.06);
+    }
+    .stat-card .label {
+      color: var(--muted);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    .stat-card .value {
+      font-size: clamp(1.8rem, 3vw, 2.3rem);
+      font-weight: 700;
+      margin-top: 8px;
+    }
+    .panel-grid {
+      display: grid;
+      grid-template-columns: minmax(280px, 420px) minmax(0, 1fr);
+      gap: 24px;
+    }
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      box-shadow: 0 10px 32px rgba(18, 38, 58, 0.06);
+      padding: 22px;
+    }
+    .card h2 {
+      margin-top: 0;
+      margin-bottom: 18px;
+    }
+    label {
+      display: block;
+      font-weight: 700;
+      margin-bottom: 6px;
+      font-size: 0.95rem;
+    }
+    input, textarea, select, button {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      font: inherit;
+    }
+    textarea { min-height: 120px; resize: vertical; }
+    .field { margin-bottom: 16px; }
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+    .checkbox-row input { width: auto; }
+    .btn {
+      border: none;
+      cursor: pointer;
+      font-weight: 700;
+      transition: transform 0.2s ease;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn-primary { background: var(--primary); color: white; }
+    .btn-secondary { background: var(--primary-soft); color: var(--primary); border: 1px solid #d7e6ff; }
+    .btn-danger { background: var(--danger); color: white; }
+    .list { display: grid; gap: 18px; }
+    .item {
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      background: #fafcff;
+    }
+    .item-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .item-head h3 { margin: 0; font-size: 1.1rem; }
+    .meta { color: var(--muted); font-size: 0.8rem; }
+    .project-preview {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      border: 1px solid var(--border);
+      background: #edf3ff;
+    }
+    .actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+    .actions .btn {
+      width: auto;
+      padding-inline: 16px;
+    }
+    .message-box {
+      margin-bottom: 16px;
+      padding: 12px 14px;
+      border-radius: 12px;
+      display: none;
+      font-weight: 600;
+    }
+    .message-box.success {
+      display: block;
+      background: #eafaf2;
+      color: var(--success);
+      border: 1px solid #cfeedd;
+    }
+    .message-box.error {
+      display: block;
+      background: #fff0f0;
+      color: var(--danger);
+      border: 1px solid #f9d1d1;
+    }
+    .settings-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 24px;
+    }
+    @media (max-width: 900px) {
+      .dashboard { grid-template-columns: repeat(2, minmax(160px, 1fr)); }
+      .panel-grid, .settings-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container topbar">
+      <h1>Portfolio Admin</h1>
+      <button id="logoutBtn" class="btn btn-secondary" type="button">Logout</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <div id="messageBox" class="message-box"></div>
+
+    <section class="dashboard" id="dashboard"></section>
+
+    <div class="panel-grid">
+      <section class="card">
+        <h2 id="formTitle">Tambah Project</h2>
+        <form id="projectForm" enctype="multipart/form-data">
+          <input type="hidden" id="projectId" name="projectId" />
+
+          <div class="field">
+            <label for="title">Judul</label>
+            <input id="title" name="title" required placeholder="Contoh: SIPROPEMPERDA" />
+          </div>
+
+          <div class="field">
+            <label for="description">Deskripsi</label>
+            <textarea id="description" name="description" required placeholder="Deskripsi proyek..."></textarea>
+          </div>
+
+          <div class="field">
+            <label for="url">URL</label>
+            <input id="url" name="url" placeholder="https://example.com" />
+          </div>
+
+          <div class="field">
+            <label for="category">Kategori</label>
+            <select id="category" name="category">
+              <option value="government">Government</option>
+              <option value="photography">Photography</option>
+              <option value="landscape">Landscape</option>
+              <option value="macro">Macro</option>
+              <option value="nightphoto">Night Photo</option>
+              <option value="illustration">Illustration</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="image">Gambar Project</label>
+            <input id="image" name="image" type="file" accept="image/*" />
+          </div>
+
+          <div class="field checkbox-row">
+            <input id="isFeatured" name="isFeatured" type="checkbox" value="true" />
+            <label for="isFeatured" style="margin:0; font-weight:600;">Jadikan featured</label>
+          </div>
+
+          <button class="btn btn-primary" type="submit">Simpan Project</button>
+          <button class="btn btn-secondary" type="button" id="cancelEdit" style="margin-top:10px; display:none;">Batal Edit</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Daftar Project</h2>
+        <div id="projectList" class="list"></div>
+      </section>
+    </div>
+
+    <div class="settings-grid">
+      <section class="card">
+        <h2>Ubah Password Admin</h2>
+        <form id="passwordForm">
+          <div class="field">
+            <label for="currentPassword">Password Saat Ini</label>
+            <input id="currentPassword" type="password" required />
+          </div>
+          <div class="field">
+            <label for="newPassword">Password Baru</label>
+            <input id="newPassword" type="password" required />
+          </div>
+          <button class="btn btn-primary" type="submit">Update Password</button>
+        </form>
+      </section>
+
+      <section class="card">
+        <h2>Pesan Kontak</h2>
+        <div id="messageList" class="list"></div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    const token = sessionStorage.getItem('portfolio_admin_token');
+    if (!token) {
+      window.location.href = '/admin-login.html';
+    }
+
+    const messageBox = document.getElementById('messageBox');
+    const dashboard = document.getElementById('dashboard');
+    const projectList = document.getElementById('projectList');
+    const messageList = document.getElementById('messageList');
+    const projectForm = document.getElementById('projectForm');
+    const projectIdInput = document.getElementById('projectId');
+    const cancelEditBtn = document.getElementById('cancelEdit');
+
+    function showMessage(type, text) {
+      messageBox.className = `message-box ${type}`;
+      messageBox.textContent = text;
+    }
+
+    function resetForm() {
+      projectForm.reset();
+      projectIdInput.value = '';
+      document.getElementById('formTitle').textContent = 'Tambah Project';
+      cancelEditBtn.style.display = 'none';
+    }
+
+    async function fetchDashboard() {
+      const response = await fetch('/api/admin/dashboard', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Gagal mengambil statistik');
+      }
+
+      const stats = result.data || {};
+      dashboard.innerHTML = `
+        <div class="stat-card"><div class="label">Total Project</div><div class="value">${stats.totalProjects ?? 0}</div></div>
+        <div class="stat-card"><div class="label">Total Pesan</div><div class="value">${stats.totalMessages ?? 0}</div></div>
+        <div class="stat-card"><div class="label">Featured</div><div class="value">${stats.featuredProjects ?? 0}</div></div>
+        <div class="stat-card"><div class="label">Latest</div><div class="value" style="font-size:1.05rem; line-height:1.4;">${(stats.latestProject || 'Belum ada project').slice(0, 20)}</div></div>
+      `;
+    }
+
+    async function fetchProjects() {
+      const response = await fetch('/api/projects-admin', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Gagal mengambil data project');
+      }
+
+      const projects = result.data || [];
+      projectList.innerHTML = '';
+
+      if (!projects.length) {
+        projectList.innerHTML = '<p>Belum ada project.</p>';
+        return;
+      }
+
+      projects.forEach((project) => {
+        const card = document.createElement('div');
+        card.className = 'item';
+        card.innerHTML = `
+          ${project.image_url ? `<img class="project-preview" src="${project.image_url}" alt="${project.title}" />` : '<div class="project-preview" style="display:flex;align-items:center;justify-content:center;color:#5c7188;">No Image</div>'}
+          <div class="item-head">
+            <h3>${project.title}</h3>
+            <span class="meta">${project.is_featured ? 'Featured' : project.category}</span>
+          </div>
+          <p class="meta">${project.url || 'Tidak ada URL'}</p>
+          <p>${project.description || ''}</p>
+          <div class="actions">
+            <button class="btn btn-secondary" type="button" data-action="edit" data-id="${project.id}">Edit</button>
+            <button class="btn btn-danger" type="button" data-action="delete" data-id="${project.id}">Hapus</button>
+          </div>
+        `;
+        projectList.appendChild(card);
+      });
+    }
+
+    async function fetchMessages() {
+      const response = await fetch('/api/contact-messages', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Gagal mengambil pesan');
+      }
+
+      const messages = result.data || [];
+      messageList.innerHTML = '';
+
+      if (!messages.length) {
+        messageList.innerHTML = '<p>Belum ada pesan masuk.</p>';
+        return;
+      }
+
+      messages.forEach((message) => {
+        const item = document.createElement('div');
+        item.className = 'item';
+        item.innerHTML = `
+          <div class="item-head">
+            <h3>${message.name}</h3>
+            <span class="meta">${new Date(message.created_at).toLocaleDateString()}</span>
+          </div>
+          <p class="meta">${message.email}</p>
+          <p>${message.message}</p>
+        `;
+        messageList.appendChild(item);
+      });
+    }
+
+    projectForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const formData = new FormData();
+      formData.append('title', document.getElementById('title').value);
+      formData.append('description', document.getElementById('description').value);
+      formData.append('url', document.getElementById('url').value);
+      formData.append('category', document.getElementById('category').value);
+      formData.append('isFeatured', document.getElementById('isFeatured').checked ? 'true' : 'false');
+
+      const imageFile = document.getElementById('image').files[0];
+      if (imageFile) {
+        formData.append('image', imageFile);
+      }
+
+      const isEdit = !!projectIdInput.value;
+      const endpoint = isEdit ? `/api/projects-admin/${projectIdInput.value}` : '/api/projects-admin';
+      const method = isEdit ? 'PUT' : 'POST';
+
+      try {
+        const response = await fetch(endpoint, {
+          method,
+          headers: { Authorization: `Bearer ${token}` },
+          body: formData
+        });
+
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.message || 'Gagal menyimpan project');
+
+        showMessage('success', isEdit ? 'Project berhasil diperbarui' : 'Project berhasil ditambahkan');
+        resetForm();
+        fetchProjects();
+        fetchDashboard();
+      } catch (err) {
+        showMessage('error', err.message);
+      }
+    });
+
+    projectList.addEventListener('click', async (e) => {
+      const button = e.target.closest('button');
+      if (!button) return;
+
+      const id = Number(button.dataset.id);
+      if (button.dataset.action === 'delete') {
+        try {
+          const response = await fetch(`/api/projects-admin/${id}`, {
+            method: 'DELETE',
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.message || 'Gagal menghapus project');
+          showMessage('success', 'Project berhasil dihapus');
+          fetchProjects();
+          fetchDashboard();
+        } catch (err) {
+          showMessage('error', err.message);
+        }
+        return;
+      }
+
+      if (button.dataset.action === 'edit') {
+        try {
+          const response = await fetch(`/api/projects-admin/${id}`, {
+            headers: { Authorization: `Bearer ${token}` }
+          });
+          const result = await response.json();
+          if (!response.ok) throw new Error(result.message || 'Gagal memuat project');
+
+          const project = result.data;
+          projectIdInput.value = project.id;
+          document.getElementById('title').value = project.title;
+          document.getElementById('description').value = project.description;
+          document.getElementById('url').value = project.url || '';
+          document.getElementById('category').value = project.category || 'government';
+          document.getElementById('isFeatured').checked = Boolean(project.is_featured);
+          document.getElementById('formTitle').textContent = 'Edit Project';
+          cancelEditBtn.style.display = 'inline-block';
+          showMessage('success', 'Project siap diubah');
+        } catch (err) {
+          showMessage('error', err.message);
+        }
+      }
+    });
+
+    cancelEditBtn.addEventListener('click', resetForm);
+
+    document.getElementById('passwordForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const currentPassword = document.getElementById('currentPassword').value;
+      const newPassword = document.getElementById('newPassword').value;
+
+      try {
+        const response = await fetch('/api/admin/password', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify({ currentPassword, newPassword })
+        });
+
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.message || 'Gagal mengubah password');
+
+        showMessage('success', result.message || 'Password berhasil diubah');
+        document.getElementById('passwordForm').reset();
+      } catch (err) {
+        showMessage('error', err.message);
+      }
+    });
+
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      sessionStorage.removeItem('portfolio_admin_token');
+      window.location.href = '/admin-login.html';
+    });
+
+    (async function init() {
+      await fetchDashboard();
+      await fetchProjects();
+      await fetchMessages();
+    })();
+  </script>
+</body>
+</html>
