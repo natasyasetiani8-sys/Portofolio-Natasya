@@ -246,6 +246,101 @@
 
     <div class="settings-grid">
       <section class="card">
+        <h2>Edit Halaman Utama</h2>
+        <form id="homepageForm">
+          <div class="field">
+            <label for="heroEyebrow">Hero Eyebrow</label>
+            <input id="heroEyebrow" type="text" />
+          </div>
+          <div class="field">
+            <label for="heroTitle">Hero Title</label>
+            <input id="heroTitle" type="text" />
+          </div>
+          <div class="field">
+            <label for="heroDescription">Hero Description</label>
+            <textarea id="heroDescription"></textarea>
+          </div>
+          <div class="field">
+            <label for="heroPrimaryCta">Primary CTA</label>
+            <input id="heroPrimaryCta" type="text" />
+          </div>
+          <div class="field">
+            <label for="heroSecondaryCta">Secondary CTA</label>
+            <input id="heroSecondaryCta" type="text" />
+          </div>
+          <div class="field">
+            <label for="aboutEyebrow">About Eyebrow</label>
+            <input id="aboutEyebrow" type="text" />
+          </div>
+          <div class="field">
+            <label for="aboutTitle">About Title</label>
+            <input id="aboutTitle" type="text" />
+          </div>
+          <div class="field">
+            <label for="aboutDescription">About Description</label>
+            <textarea id="aboutDescription"></textarea>
+          </div>
+          <div class="field">
+            <label for="featuredEyebrow">Featured Eyebrow</label>
+            <input id="featuredEyebrow" type="text" />
+          </div>
+          <div class="field">
+            <label for="featuredTitle">Featured Title</label>
+            <input id="featuredTitle" type="text" />
+          </div>
+          <div class="field">
+            <label for="featuredDescription">Featured Description</label>
+            <textarea id="featuredDescription"></textarea>
+          </div>
+          <div class="field">
+            <label for="portfolioEyebrow">Portfolio Eyebrow</label>
+            <input id="portfolioEyebrow" type="text" />
+          </div>
+          <div class="field">
+            <label for="portfolioTitle">Portfolio Title</label>
+            <input id="portfolioTitle" type="text" />
+          </div>
+          <div class="field">
+            <label for="portfolioDescription">Portfolio Description</label>
+            <textarea id="portfolioDescription"></textarea>
+          </div>
+          <div class="field">
+            <label for="experienceTitle">Experience Title</label>
+            <input id="experienceTitle" type="text" />
+          </div>
+          <div class="field">
+            <label for="experienceDescription">Experience Description</label>
+            <textarea id="experienceDescription"></textarea>
+          </div>
+          <div class="field">
+            <label for="orgTitle">Organization Title</label>
+            <input id="orgTitle" type="text" />
+          </div>
+          <div class="field">
+            <label for="orgDescription">Organization Description</label>
+            <textarea id="orgDescription"></textarea>
+          </div>
+          <div class="field">
+            <label for="contactTitle">Contact Title</label>
+            <input id="contactTitle" type="text" />
+          </div>
+          <div class="field">
+            <label for="contactDescription">Contact Description</label>
+            <textarea id="contactDescription"></textarea>
+          </div>
+          <div class="field">
+            <label for="footerBrand">Footer Brand</label>
+            <input id="footerBrand" type="text" />
+          </div>
+          <div class="field">
+            <label for="footerCopyright">Footer Copyright</label>
+            <input id="footerCopyright" type="text" />
+          </div>
+          <button class="btn btn-primary" type="submit">Simpan Halaman Utama</button>
+        </form>
+      </section>
+
+      <section class="card">
         <h2>Ubah Password Admin</h2>
         <form id="passwordForm">
           <div class="field">
@@ -260,7 +355,7 @@
         </form>
       </section>
 
-      <section class="card">
+      <section class="card" style="grid-column: 1 / -1;">
         <h2>Pesan Kontak</h2>
         <div id="messageList" class="list"></div>
       </section>
@@ -469,6 +564,103 @@
 
     cancelEditBtn.addEventListener('click', resetForm);
 
+    async function fetchHomepageSettings() {
+      const response = await fetch('/api/homepage', {
+        headers: { Authorization: `Bearer ${token}` }
+      });
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.message || 'Gagal mengambil pengaturan halaman utama');
+      }
+
+      const settings = result.data || {};
+      document.getElementById('heroEyebrow').value = settings.hero?.eyebrow || '';
+      document.getElementById('heroTitle').value = settings.hero?.title || '';
+      document.getElementById('heroDescription').value = settings.hero?.description || '';
+      document.getElementById('heroPrimaryCta').value = settings.hero?.primaryCta || '';
+      document.getElementById('heroSecondaryCta').value = settings.hero?.secondaryCta || '';
+      document.getElementById('aboutEyebrow').value = settings.about?.eyebrow || '';
+      document.getElementById('aboutTitle').value = settings.about?.title || '';
+      document.getElementById('aboutDescription').value = settings.about?.description || '';
+      document.getElementById('featuredEyebrow').value = settings.featured?.eyebrow || '';
+      document.getElementById('featuredTitle').value = settings.featured?.title || '';
+      document.getElementById('featuredDescription').value = settings.featured?.description || '';
+      document.getElementById('portfolioEyebrow').value = settings.portfolio?.eyebrow || '';
+      document.getElementById('portfolioTitle').value = settings.portfolio?.title || '';
+      document.getElementById('portfolioDescription').value = settings.portfolio?.description || '';
+      document.getElementById('experienceTitle').value = settings.experience?.title || '';
+      document.getElementById('experienceDescription').value = settings.experience?.description || '';
+      document.getElementById('orgTitle').value = settings.experience?.orgTitle || '';
+      document.getElementById('orgDescription').value = settings.experience?.orgDescription || '';
+      document.getElementById('contactTitle').value = settings.contact?.title || '';
+      document.getElementById('contactDescription').value = settings.contact?.description || '';
+      document.getElementById('footerBrand').value = settings.footer?.brand || '';
+      document.getElementById('footerCopyright').value = settings.footer?.copyright || '';
+    }
+
+    document.getElementById('homepageForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const payload = {
+        hero: {
+          eyebrow: document.getElementById('heroEyebrow').value,
+          title: document.getElementById('heroTitle').value,
+          description: document.getElementById('heroDescription').value,
+          primaryCta: document.getElementById('heroPrimaryCta').value,
+          secondaryCta: document.getElementById('heroSecondaryCta').value
+        },
+        about: {
+          eyebrow: document.getElementById('aboutEyebrow').value,
+          title: document.getElementById('aboutTitle').value,
+          description: document.getElementById('aboutDescription').value
+        },
+        featured: {
+          eyebrow: document.getElementById('featuredEyebrow').value,
+          title: document.getElementById('featuredTitle').value,
+          description: document.getElementById('featuredDescription').value
+        },
+        portfolio: {
+          eyebrow: document.getElementById('portfolioEyebrow').value,
+          title: document.getElementById('portfolioTitle').value,
+          description: document.getElementById('portfolioDescription').value
+        },
+        experience: {
+          title: document.getElementById('experienceTitle').value,
+          description: document.getElementById('experienceDescription').value,
+          orgTitle: document.getElementById('orgTitle').value,
+          orgDescription: document.getElementById('orgDescription').value
+        },
+        contact: {
+          title: document.getElementById('contactTitle').value,
+          description: document.getElementById('contactDescription').value
+        },
+        footer: {
+          brand: document.getElementById('footerBrand').value,
+          copyright: document.getElementById('footerCopyright').value
+        }
+      };
+
+      try {
+        const response = await fetch('/api/admin/homepage', {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${token}`
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+        if (!response.ok) throw new Error(result.message || 'Gagal menyimpan halaman utama');
+
+        showMessage('success', result.message || 'Halaman utama berhasil diperbarui');
+        await loadHomepageConfig();
+      } catch (err) {
+        showMessage('error', err.message);
+      }
+    });
+
     document.getElementById('passwordForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       const currentPassword = document.getElementById('currentPassword').value;
@@ -503,6 +695,7 @@
       await fetchDashboard();
       await fetchProjects();
       await fetchMessages();
+      await fetchHomepageSettings();
     })();
   </script>
 </body>

@@ -15,7 +15,9 @@ const {
   getMessages,
   getSetting,
   setSetting,
-  getStats
+  getStats,
+  getHomepageSettings,
+  saveHomepageSettings
 } = require('./db');
 
 const app = express();
@@ -99,6 +101,15 @@ app.get('/api/health', (req, res) => {
 
 app.get('/api/profile', (req, res) => {
   res.json({ success: true, data: portfolioData.profile });
+});
+
+app.get('/api/homepage', async (req, res) => {
+  try {
+    const homepageSettings = await getHomepageSettings();
+    res.json({ success: true, data: homepageSettings });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
 });
 
 app.get('/api/projects', async (req, res) => {
@@ -285,6 +296,16 @@ app.post('/api/admin/password', verifyAdmin, async (req, res) => {
 
   await setSetting('admin_password', newPassword);
   return res.json({ success: true, message: 'Password updated successfully.' });
+});
+
+app.put('/api/admin/homepage', verifyAdmin, async (req, res) => {
+  try {
+    const payload = req.body || {};
+    const updated = await saveHomepageSettings(payload);
+    return res.json({ success: true, data: updated, message: 'Homepage updated successfully.' });
+  } catch (error) {
+    return res.status(500).json({ success: false, message: error.message });
+  }
 });
 
 app.get('/admin-login.html', (req, res) => {
