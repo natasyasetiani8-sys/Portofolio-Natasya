@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Natasya Okta Setiani — Profile</title>
+<meta name="description" content="Portofolio pribadi: fotografi landscape & macro, serta pengalaman profesional di bidang pemerintahan dan kebijakan publik." />
+
+<!--
+  ================================================================
+  PANDUAN KUSTOMISASI CEPAT
+  ================================================================
+  1. Ganti semua teks "Nama Anda" / "[Jabatan Anda]" / "[Nama Instansi]"
+     / "[20XX]" dengan data asli Anda (cari tanda kurung siku).
+  2. Ganti foto: setiap kartu di bagian "Karya" punya <div class="photo-surface">
+     — ganti dengan <img src="foto-anda.jpg" alt="deskripsi foto" style="width:100%;height:100%;object-fit:cover">
+     lalu hapus kelas ph-landscape/ph-macro pada elemen tersebut (kelas itu hanya
+     menghasilkan gradasi warna sebagai placeholder).
+    3. Palet warna & font diatur di :root pada file site.css.
+    4. Setiap bagian tersedia sebagai halaman terpisah.
+  ================================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Langsung ke konten utama</a>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="siteNav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <span class="logo-mark" aria-hidden="true"></span>
+      Natasya Okta Setiani
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="profile.html">Profile</a>
+      <a href="featured-project.html">Featured Project</a>
+      <a href="work.html">Work</a>
+      <a href="experiences.html">Experiences</a>
+      <a href="contact.html" class="btn btn-gov nav-cta">Contact Me</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <section id="profil" class="section-profile">
+    <div class="container">
+      <div class="duality-head reveal">
+        <span class="eyebrow" data-homepage-key="about.eyebrow">Educational Background</span>
+        <h2 data-homepage-key="about.title">Building Solutions Through Law and Public Service • Where Creativity Meets Digital Innovation</h2>
+        <p data-homepage-key="about.description">Equipped with comprehensive legal knowledge and a passion for public service, I specialize in legislative drafting, policy development, and regulatory analysis.
+          A strong foundation in multimedia production, visual design, photography, and digital media has nurtured both my technical expertise and artistic perspective, enabling me to bridge creativity with professional communication.</p>
+      </div>
+
+      <div class="duality-grid">
+        <article class="duality-card gov neu reveal">
+          <div class="duality-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#EAF3FF" stroke-width="1.8">
+              <path d="M4 21h16M6 21V9l6-4 6 4v12M9 21v-6h6v6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>Tidar University</h3>
+          <p class="desc">
+            • Participant in the Indonesian Student Micro-credential Program (KMMI) at Universitas Lampung.
+            • Actively participated in 10+ campus events, such as webinars, community service, and leadership training.
+            • Actively involved in several organizations and committees at the Department, Faculty, and University levels.
+          </p>
+          <div class="tag-row">
+            <span class="tag on-navy">Bachelor of Law</span>
+            <span class="tag on-navy">GPA : 3.70/4.00</span>
+            <span class="tag on-navy">2019 - 2024</span>
+            <span class="tag on-navy">Undergraduate Research Project : Disparity in Sentencing for Perpetrators of Illegal Wildlife Trade Crimes</span>
+          </div>
+        </article>
+
+        <article class="duality-card photo glass reveal">
+          <div class="duality-icon" aria-hidden="true">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#042C8F" stroke-width="1.8">
+              <path d="M4 8h3l1.5-2h7L17 8h3v11H4V8Z" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="12" cy="13.5" r="3.4"/>
+            </svg>
+          </div>
+          <h3>Vocational High School</h3>
+          <p class="desc">
+            • Created various graphic design projects such as posters, brochures, and logos using software such as Corel Draw.
+            • Participated in workshops and seminars on photography techniques and photo editing. 
+            • Performed video production, starting from the planning stage, shooting, to the editing process.
+          </p>
+          <div class="tag-row">
+            <span class="tag on-glass">Multimedia</span>
+            <span class="tag on-glass">SMK N 1 KEBUMEN</span>
+            <span class="tag on-glass">2016 - 2019</span>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <span class="brand"><span class="logo-mark" aria-hidden="true"></span> <span data-homepage-key="footer.brand">Natasya Okta Setiani</span></span>
+    <span data-homepage-key="footer.copyright">© 2026 Natasya Okta Setiani. All rights reserved.</span>
+  </div>
+</footer>
+
+<script src="site.js" defer></script>
+</body>
+</html>

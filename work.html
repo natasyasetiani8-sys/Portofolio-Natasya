@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="id"><head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Natasya Okta Setiani — Work</title>
+<meta name="description" content="Portofolio pribadi: fotografi landscape & macro, serta pengalaman profesional di bidang pemerintahan dan kebijakan publik." />
+
+<!--
+  ================================================================
+  PANDUAN KUSTOMISASI CEPAT
+  ================================================================
+  1. Ganti semua teks "Nama Anda" / "[Jabatan Anda]" / "[Nama Instansi]"
+     / "[20XX]" dengan data asli Anda (cari tanda kurung siku).
+  2. Ganti foto: setiap kartu di bagian "Karya" punya <div class="photo-surface">
+     — ganti dengan <img src="foto-anda.jpg" alt="deskripsi foto" style="width:100%;height:100%;object-fit:cover">
+     lalu hapus kelas ph-landscape/ph-macro pada elemen tersebut (kelas itu hanya
+     menghasilkan gradasi warna sebagai placeholder).
+    3. Palet warna & font diatur di :root pada file site.css.
+    4. Setiap bagian tersedia sebagai halaman terpisah.
+  ================================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+<a class="skip-link" href="#main">Langsung ke konten utama</a>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="siteNav">
+  <div class="nav-inner">
+    <a href="index.html" class="brand">
+      <span class="logo-mark" aria-hidden="true"></span>
+      Natasya Okta Setiani
+    </a>
+    <nav class="nav-links" id="navLinks">
+      <a href="index.html">Home</a>
+      <a href="profile.html">Profile</a>
+      <a href="featured-project.html">Featured Project</a>
+      <a href="work.html">Work</a>
+      <a href="experiences.html">Experiences</a>
+      <a href="contact.html" class="btn btn-gov nav-cta">Contact Me</a>
+    </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Buka menu" aria-expanded="false" aria-controls="navLinks">
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<main id="main">
+  <section id="karya" class="section-work">
+    <div class="container">
+      <div class="gallery-head reveal">
+        <div>
+          <span class="eyebrow" data-homepage-key="portfolio.eyebrow">Portofolio</span>
+          <h2 data-homepage-key="portfolio.title">Selected Works</h2>
+          <p data-homepage-key="portfolio.description">A small part of my visual journey: zoom in on the details, broaden your horizons.</p>
+        </div>
+        <div class="filter-tabs" role="tablist" aria-label="Filter kategori foto">
+          <button class="filter-btn active" data-filter="all" role="tab" aria-selected="true">All</button>
+          <button class="filter-btn" data-filter="landscape" role="tab" aria-selected="false">Landscape</button>
+          <button class="filter-btn" data-filter="macro" role="tab" aria-selected="false">Macro</button>
+          <button class="filter-btn" data-filter="nightphoto" role="tab" aria-selected="false">Night Photo</button>
+          <button class="filter-btn" data-filter="illustration" role="tab" aria-selected="false">Illustration</button>
+        </div>
+      </div>
+
+      <div class="gallery-grid" id="galleryGrid">
+
+        <article class="photo-card reveal" data-category="landscape">
+          <div class="photo-frame" tabindex="0">
+            <div class="photo-surface ph-landscape"></div>
+            <div class="photo-overlay">
+              <span class="photo-badge">Landscape</span>
+              <h3 class="photo-title">Kabut Pagi, [Nama Lokasi]</h3>
+              <p class="photo-exif">f/11 · 24mm · 1/60s · ISO 100</p>
+            </div>
+            <div class="photo-hint">Ganti dengan foto Anda</div>
+          </div>
+        </article>
+
+        <article class="photo-card reveal" data-category="macro">
+          <div class="photo-frame" tabindex="0">
+            <div class="photo-surface ph-macro"></div>
+            <div class="photo-overlay">
+              <span class="photo-badge">Macro</span>
+              <h3 class="photo-title">Embun di Kelopak</h3>
+              <p class="photo-exif">f/4.5 · 100mm · 1/250s · ISO 200</p>
+            </div>
+            <div class="photo-hint">Ganti dengan foto Anda</div>
+          </div>
+        </article>
+
+        <article class="photo-card reveal" data-category="landscape">
+          <div class="photo-frame" tabindex="0">
+            <div class="photo-surface ph-landscape"></div>
+            <div class="photo-overlay">
+              <span class="photo-badge">Landscape</span>
+              <h3 class="photo-title">Garis Cakrawala, [Nama Lokasi]</h3>
+              <p class="photo-exif">f/9 · 16mm · 1/125s · ISO 100</p>
+            </div>
+            <div class="photo-hint">Ganti dengan foto Anda</div>
+          </div>
+        </article>
+
+        <article class="photo-card reveal" data-category="macro">
+          <div class="photo-frame" tabindex="0">
+            <div class="photo-surface ph-macro"></div>
+            <div class="photo-overlay">
+              <span class="photo-badge">Macro</span>
+              <h3 class="photo-title">Tekstur Sayap Kupu-kupu</h3>
+              <p class="photo-exif">f/5.6 · 90mm · 1/320s · ISO 400</p>
+            </div>
+            <div class="photo-hint">Ganti dengan foto Anda</div>
+          </div>
+        </article>
+
+        <article class="photo-card reveal" data-category="landscape">
+          <div class="photo-frame" tabindex="0">
+            <div class="photo-surface ph-landscape"></div>
+            <div class="photo-overlay">
+              <span class="photo-badge">Landscape</span>
+              <h3 class="photo-title">Ombak Senja, [Nama Lokasi]</h3>
+              <p class="photo-exif">f/13 · 20mm · 2s · ISO 100</p>
+            </div>
+            <div class="photo-hint">Ganti dengan foto Anda</div>
+          </div>
+        </article>
+
+        <article class="photo-card reveal" data-category="macro">
+          <div class="photo-frame" tabindex="0">
+            <div class="photo-surface ph-macro"></div>
+            <div class="photo-overlay">
+              <span class="photo-badge">Macro</span>
+              <h3 class="photo-title">Pola Alami Daun</h3>
+              <p class="photo-exif">f/6.3 · 60mm · 1/200s · ISO 160</p>
+            </div>
+            <div class="photo-hint">Ganti dengan foto Anda</div>
+          </div>
+        </article>
+
+        <article class="photo-card reveal" data-category="nightphoto">
+          <div class="photo-frame" tabindex="0">
+            <div class="photo-surface ph-night-photo"></div>
+            <div class="photo-overlay">
+              <span class="photo-badge">Night Photo</span>
+              <h3 class="photo-title">City Lights Serenade</h3>
+              <p class="photo-exif">Night Photography · Long Exposure</p>
+            </div>
+            <div class="photo-hint">Ganti dengan karya Anda</div>
+          </div>
+        </article>
+
+        <article class="photo-card reveal" data-category="nightphoto">
+          <div class="photo-frame" tabindex="0">
+            <div class="photo-surface ph-night-photo"></div>
+            <div class="photo-overlay">
+              <span class="photo-badge">Night Photo</span>
+              <h3 class="photo-title">Midnight Skyline</h3>
+              <p class="photo-exif">Night Photography · Urban Glow</p>
+            </div>
+            <div class="photo-hint">Ganti dengan karya Anda</div>
+          </div>
+        </article>
+
+        <article class="photo-card reveal" data-category="illustration">
+          <div class="photo-frame" tabindex="0">
+            <div class="photo-surface ph-illustration"></div>
+            <div class="photo-overlay">
+              <span class="photo-badge">Illustration</span>
+              <h3 class="photo-title">Moonlit Alley</h3>
+              <p class="photo-exif">Illustration · Shadow · Atmosphere</p>
+            </div>
+            <div class="photo-hint">Ganti dengan karya Anda</div>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <span class="brand"><span class="logo-mark" aria-hidden="true"></span> <span data-homepage-key="footer.brand">Natasya Okta Setiani</span></span>
+    <span data-homepage-key="footer.copyright">© 2026 Natasya Okta Setiani. All rights reserved.</span>
+  </div>
+</footer>
+
+<script src="site.js" defer></script>
+</body>
+</html>
